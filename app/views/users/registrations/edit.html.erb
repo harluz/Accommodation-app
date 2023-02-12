@@ -31,7 +31,7 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
-  <%= image_tag resource.avatar, size: "80x80" %>
+  <%= image_tag resource.avatar.variant(resize: "80x80").processed %>
   <div class="field">
     <%= f.label :avatar %><br />
     <%= f.file_field :avatar, autocomplete: "avatar" %>
