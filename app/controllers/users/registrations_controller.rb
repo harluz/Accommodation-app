@@ -15,8 +15,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
   end
-
-  
   
   # GET /users/edit
   def edit
@@ -51,14 +49,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer. 許可するための追加パラメータがある場合は、sanitizerに追加する
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :introduction, :avatar])
   end
 
   # The path used after sign up. サインアップ後に使用するpath
   def after_sign_up_path_for(resource)
     users_profile_path
-    # users_show_path deviseに埋め込んでみたshowアクションの場合
-    # super(resource)
   end
 
   # The path used after sign up for inactive accounts. アクティブでないアカウントのサインアップ後に使用するpath
