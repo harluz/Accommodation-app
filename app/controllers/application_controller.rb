@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  # ログイン済みユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
@@ -8,11 +11,11 @@ class ApplicationController < ActionController::Base
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    user_path
+    user_path(resource)
   end
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    new_user_registration_path
+    super(resource)
   end
 end
