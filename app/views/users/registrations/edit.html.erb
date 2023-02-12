@@ -31,6 +31,12 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <%= image_tag resource.avatar, size: "80x80" %>
+  <div class="field">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar, autocomplete: "avatar" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
