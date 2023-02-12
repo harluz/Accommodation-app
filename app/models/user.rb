@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # :avatarはファイル名　なんでもいい
+  has_one_attached :avatar
+  
   validates :name, presence: true
   
   # Include default devise modules. Others available are:
