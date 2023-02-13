@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rooms/index'
   get 'users/profile'
   root 'top_pages#index'
   get 'top_pages/index'
@@ -12,4 +13,6 @@ Rails.application.routes.draw do
   # devise_scope :user do
   #   get 'users/show' => 'users/registrations#show'
   # end
+
+  resources :room
 end
