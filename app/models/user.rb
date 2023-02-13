@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # :avatarはファイル名　なんでもいい
   has_one_attached :avatar
+
+  has_many :rooms
   
   validates :name, presence: true
   
