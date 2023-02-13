@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   #   get 'users/show' => 'users/registrations#show'
   # end
 
-  resources :room
+  resources :rooms
 end
