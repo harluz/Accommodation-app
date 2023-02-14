@@ -16,8 +16,9 @@
     <% if user_signed_in? %>
       <%= image_tag current_user.avatar.variant(resize: "40x40").processed %>
       <p><%= current_user.name %></p>
+      <p><%= link_to "施設の新規登録", new_room_path %><br /></p>
     <% else %>
-    <p><%= link_to "ログイン", new_user_session_path %><br /></p>
+      <p><%= link_to "ログイン", new_user_session_path %><br /></p>
       <p><%= link_to "新規登録", users_profile_path %><br /></p>
     <% end %>
     <p class="notice"><%= notice %></p>
