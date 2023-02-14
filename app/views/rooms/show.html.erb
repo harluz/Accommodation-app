@@ -3,6 +3,8 @@
   <p><%= link_to "編集する", edit_room_path %></p>
 <% end %>
 
+<%= link_to "戻る", :back %>
+
 <%= image_tag @room.image.variant(resize: "550x317") %>
 <p><%= @room.name %></p>
 <p><%= @room.price %></p>
