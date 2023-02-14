@@ -1,0 +1,13 @@
+<% @rooms.each do |room|%>
+  <%= link_to room_path(room.id) do %>
+    <%= image_tag room.image.variant(resize: "120x69").processed %>
+  <% end %>
+  <%= link_to room_path(room.id) do %>
+    <p><%= room.name %></p>
+  <% end %>
+  <p><%= room.detail %></p>
+  <p><%= room.adress %></p>
+  <p><%= room.updated_at %></p>
+  <p><%= link_to "削除", room, method: :delete, data: { confirm: "施設を削除しますか？" }  %></p>
+  <p>------------------------------</p>
+<% end %>

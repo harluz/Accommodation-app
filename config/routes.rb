@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rooms/own'
   get 'rooms/index'
   get 'users/profile'
   root 'top_pages#index'

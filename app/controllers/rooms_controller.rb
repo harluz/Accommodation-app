@@ -26,7 +26,6 @@ class RoomsController < ApplicationController
   end
 
   def show
-    
   end
 
   def edit
@@ -44,9 +43,13 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy
     flash[:notice] = "施設情報を削除しました。"
-    redirect_to room_index_path
+    redirect_to rooms_index_path
   end
 
+  def own
+    @rooms = current_user.rooms
+  end
+  
 
   private
 
