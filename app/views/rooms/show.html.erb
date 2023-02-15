@@ -10,3 +10,26 @@
 <p><%= @room.price %></p>
 <p><%= @room.detail %></p>
 <p><%= @room.adress %></p>
+
+<%= form_with(model: @reservation, url: confirm_reservations_path(@reservation)) do |f| %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+
+  <div class="field">
+    <%= f.label :check_in %><br />
+    <%= f.date_field :check_in, autofocus: true, autocomplete: "check_in" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :check_out %><br />
+    <%= f.date_field :check_out, autofocus: true, autocomplete: "check_out" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :count_person %>
+    <%= f.number_field :count_person, min: 0, autocomplete: "count_person" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "予約する" %>
+  </div>
+<% end %>

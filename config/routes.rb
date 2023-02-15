@@ -17,4 +17,10 @@ Rails.application.routes.draw do
   # end
 
   resources :rooms
+  
+  resources :reservations do
+    collection do
+      post :confirm
+    end
+  end
 end
