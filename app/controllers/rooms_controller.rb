@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :load_room, only: [:show, :update, :destroy]
+  before_action :load_room, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user, only: [:edit, :update, :destroy]
 
   def index
@@ -30,11 +30,9 @@ class RoomsController < ApplicationController
   end
 
   def edit
-    # @room = Room.find(params[:id])
   end
 
   def update
-    # エラーが発生したらbefore_actionを確認すること
     if @room.update(room_params)
       flash[:notice] = "施設情報を更新しました。"
       redirect_to :rooms
