@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'reservations/confirm'
+  get 'reservations/index'
   get 'rooms/own'
   get 'rooms/index'
   get 'users/profile'

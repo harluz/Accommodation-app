@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :default_avatar, :authenticate_user!
+  before_action :default_avatar, only: [:profile]
+  before_action :authenticate_user!
 
   def profile
     @user = current_user
