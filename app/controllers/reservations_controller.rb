@@ -26,7 +26,7 @@ class ReservationsController < ApplicationController
 
     if @reservation.save
       flash[:notice] = "予約が完了しました。"
-      puts "予約に成功しています"
+      redirect_to reservations_path
     else
       render :new
     end
