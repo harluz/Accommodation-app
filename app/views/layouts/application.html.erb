@@ -17,8 +17,10 @@
       <%= image_tag current_user.avatar.variant(resize: "40x40").processed %>
       <p><%= current_user.name %></p>
       <p><%= link_to "施設の新規登録", new_room_path %><br /></p>
-      <p><%= link_to "登録済み一覧", rooms_own_path %><br /></p>
       <p><%= link_to "予約済み一覧", reservations_path %><br /></p>
+      <p><%= link_to "登録済み一覧", rooms_own_path %><br /></p>
+      <p><%= link_to "アカウント設定", users_account_path %><br /></p>
+      <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %><br /></p>
     <% else %>
       <p><%= link_to "ログイン", new_user_session_path %><br /></p>
       <p><%= link_to "新規登録", new_user_registration_path %><br /></p>
