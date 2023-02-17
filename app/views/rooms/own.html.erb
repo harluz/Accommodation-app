@@ -7,7 +7,9 @@
   <% end %>
   <p><%= room.detail %></p>
   <p><%= room.adress %></p>
+  <p><%= room.price %></p>
   <p><%= room.updated_at %></p>
+  <p><%= link_to "編集", edit_room_path(room.id) %></p>
   <p><%= link_to "削除", room, method: :delete, data: { confirm: "施設を削除しますか？" }  %></p>
   <p>------------------------------</p>
 <% end %>
