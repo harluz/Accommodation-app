@@ -13,14 +13,17 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def index
+    @reservations = Reservation.all
+  end
+  
+
   def create
     @reservation = Reservation.new(reservation_params)
     @room = Room.find(params[:reservation][:room_id])
     @reservation.user_id = current_user.id
-    @reservation.room_id = @room.id
-    
-    binding.pry
-    
+    @reservation.room_id = @room.id  
+
     if @reservation.save
       flash[:notice] = "予約が完了しました。"
       puts "予約に成功しています"
@@ -33,9 +36,18 @@ class ReservationsController < ApplicationController
   end
 
   def edit
+    # @reservation = Reservation.find(params[:id])
   end
 
   def update
+    # @reservation = Reservation.find(params[:id])
+    # if @reservation.update(reservation_params)
+    #   flash[:notice] = "予約の更新が完了しました。"
+    #   redirect_to reservations_confirm_path
+    # else
+    #   flash[:alert] = "予約の更新に失敗しました。"
+    #   render :edit
+    # end
   end
 
   def destroy
