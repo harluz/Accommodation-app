@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -15,12 +15,18 @@
 
     <% if user_signed_in? %>
       <%= image_tag current_user.avatar.variant(resize: "40x40").processed %>
-      <p><%= current_user.name %></p>
-      <p><%= link_to "施設の新規登録", new_room_path %><br /></p>
-      <p><%= link_to "予約済み一覧", reservations_path %><br /></p>
-      <p><%= link_to "登録済み一覧", rooms_own_path %><br /></p>
-      <p><%= link_to "アカウント設定", users_account_path %><br /></p>
-      <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %><br /></p>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= current_user.name %>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><p class="dropdown-item"><%= link_to "施設の新規登録", new_room_path %></p></li>
+          <li><p class="dropdown-item"><%= link_to "予約済み一覧", reservations_path %></p></li>
+          <li><p class="dropdown-item"><%= link_to "登録済み一覧", rooms_own_path %></p></li>
+          <li><p class="dropdown-item"><%= link_to "アカウント設定", users_account_path %></p></li>
+          <li><p class="dropdown-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p></li>
+        </ul>
+      </div>
     <% else %>
       <p><%= link_to "ログイン", new_user_session_path %><br /></p>
       <p><%= link_to "新規登録", new_user_registration_path %><br /></p>
