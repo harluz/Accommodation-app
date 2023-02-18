@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   # ログイン済みユーザーのみにアクセスを許可する
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:top]
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
