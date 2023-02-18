@@ -7,7 +7,7 @@ class ReservationsController < ApplicationController
     @room = Room.find(params[:reservation][:room_id])
     @reservation.user_id = current_user.id
     @reservation.room_id = @room.id
-    
+    @reservation.total_cost = @reservation.count_person * @room.price
     if @reservation.invalid?
       render :new
     end
@@ -22,8 +22,8 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
     @room = Room.find(params[:reservation][:room_id])
     @reservation.user_id = current_user.id
-    @reservation.room_id = @room.id  
-
+    @reservation.room_id = @room.id
+    @reservation.total_cost = @reservation.count_person * @room.price
     if @reservation.save
       flash[:notice] = "予約が完了しました。"
       redirect_to reservations_path
