@@ -55,7 +55,7 @@ class RoomsController < ApplicationController
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [:adress, :name]
+    ["adress", "created_at", "detail", "id", "name", "price", "updated_at", "user_id"]
   end
   
 
