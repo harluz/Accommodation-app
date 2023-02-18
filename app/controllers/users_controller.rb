@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :default_avatar, only: [:profile]
+  before_action :default_avatar, only: [:profile, :update]
   before_action :authenticate_user!
 
   def profile
@@ -12,17 +12,25 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.update(configure_account_update_params)
+    if @user.update(user_parmas)
       flash[:notice] = "プロフィールの更新が完了しました。"
+      redirect_to users_profile_path
+    else
+      flash[:notice] = "プロフィールの更新に失敗しました。"
+      render users_profile_edit_path
     end
   end
   
-
   def account
     @user = current_user
   end
 
   protected
+
+  def user_parmas
+    params.require(:user).permit(:name, :introduction, :avatar)
+  end
+  
 
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :introduction, :avatar])
