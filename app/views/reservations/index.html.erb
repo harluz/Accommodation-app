@@ -1,0 +1,17 @@
+<% @reservations.each do |reservation|%>
+  <%= link_to room_path(reservation.room) do %>
+    <%= image_tag reservation.room.image.variant(resize: "120x69").processed %>
+  <% end %>
+  <%= link_to room_path(reservation.room) do %>
+    <p><%= reservation.room.name %></p>
+  <% end %>
+  <p><%= reservation.room.detail %></p>
+  <p>¥<%= reservation.total_cost %></p>
+  <p><%= reservation.check_in %></p>
+  <p><%= reservation.check_out %></p>
+  <p><%= reservation.created_at %></p>
+
+  <p><%= link_to "再予約", edit_reservation_path(reservation) %></p>
+  <p><%= link_to "予約を削除", reservation, method: :delete, data: { confirm: "予約を削除しますか？" }  %></p>
+  <p>------------------------------</p>
+<% end %>

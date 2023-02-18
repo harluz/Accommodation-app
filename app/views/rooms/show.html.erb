@@ -1,0 +1,35 @@
+
+<% if @room.user == current_user %>
+  <p><%= link_to "編集", edit_room_path %></p>
+<% end %>
+
+<%= link_to "戻る", :back %>
+
+<%= image_tag @room.image.variant(resize: "550x317") %>
+<p><%= @room.name %></p>
+<p><%= @room.price %></p>
+<p><%= @room.detail %></p>
+<p><%= @room.adress %></p>
+
+<%= form_with(model: @reservation, url: confirm_reservations_path(@reservation)) do |f| %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+
+  <div class="field">
+    <%= f.label :check_in %><br />
+    <%= f.date_field :check_in, autofocus: true, autocomplete: "check_in" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :check_out %><br />
+    <%= f.date_field :check_out, autofocus: true, autocomplete: "check_out" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :count_person %>
+    <%= f.number_field :count_person, min: 0, autocomplete: "count_person" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "予約する" %>
+  </div>
+<% end %>
