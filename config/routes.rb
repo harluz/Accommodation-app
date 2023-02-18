@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   #   get 'users/show' => 'users/registrations#show'
   # end
 
-  resources :rooms
+  resources :rooms do
+    collection do
+      get 'search'
+    end
+  end
   
   resources :reservations do
     collection do

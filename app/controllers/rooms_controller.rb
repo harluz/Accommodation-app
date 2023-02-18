@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :load_room, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user, only: [:edit, :update, :destroy]
+  before_action :set_q, only: [:index, :search]
 
   def index
     @rooms = Room.all
@@ -49,32 +50,38 @@ class RoomsController < ApplicationController
     @rooms = current_user.rooms
   end
   
+  def search
+    @result = @q.result
+  end
 
   private
 
-    def room_params
-      params.require(:room).permit(:name,:detail, :adress, :price, :image)
-    end
+  def set_q
+    @q = Room.ransack(params[:q])
+  end
+  
+  def room_params
+    params.require(:room).permit(:name,:detail, :adress, :price, :image)
+  end
 
-    def load_room
-      @room = Room.find(params[:id])
-    end
-    
-    
-    def ensure_user
-      @rooms = current_user.rooms
-      @room = @rooms.find_by(id: params[:id])
-      # current_userのroomでなければ飛ばす
-      redirect_to room_index_path unless @room
-    end
+  def load_room
+    @room = Room.find(params[:id])
+  end
+  
+  def ensure_user
+    @rooms = current_user.rooms
+    @room = @rooms.find_by(id: params[:id])
+    # current_userのroomでなければ飛ばす
+    redirect_to room_index_path unless @room
+  end
   
 
   protected
 
-    def defualt_room_image
-      if !@room.image.attached?
-        @room.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default-room-image.png')), filename: 'default-room-image.png', content_type: 'image/png')
-      end
+  def defualt_room_image
+    if !@room.image.attached?
+      @room.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default-room-image.png')), filename: 'default-room-image.png', content_type: 'image/png')
     end
+  end
   
 end
