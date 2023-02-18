@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :load_room, only: [:show, :edit, :update, :destroy]
   before_action :ensure_user, only: [:edit, :update, :destroy]
+  before_action :set_q, only: [:index, :search]
 
   def index
     @rooms = Room.all
@@ -49,8 +50,21 @@ class RoomsController < ApplicationController
     @rooms = current_user.rooms
   end
   
+  def search
+    @result = @q.result
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    [:adress, :name]
+  end
+  
 
   private
+
+    def set_q
+      @q = Room.ransack(params[:q])
+    end
+    
 
     def room_params
       params.require(:room).permit(:name,:detail, :adress, :price, :image)
@@ -59,7 +73,6 @@ class RoomsController < ApplicationController
     def load_room
       @room = Room.find(params[:id])
     end
-    
     
     def ensure_user
       @rooms = current_user.rooms
