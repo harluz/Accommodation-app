@@ -26,7 +26,7 @@
             <% end %>
           </td>
           <td><%= reservation.room.detail %></td>
-          <td>¥<%= reservation.total_cost %></td>
+          <td><%= number_to_currency(reservation.total_cost, unit: "¥", format: "%u %n" ) %></td>
           <td><%= l reservation.check_in %></td>
           <td><%= l reservation.check_out %></td>
           <td><%= l reservation.created_at, format: :long %></td>
@@ -52,7 +52,7 @@
                     <p><%= reservation.room.name %></p>
                     <p><%= l reservation.check_in %> ~ <%= l reservation.check_out %></p>
                     <p><%= reservation.count_person %>人</p>
-                    <p>¥ <%= reservation.total_cost %></p>
+                    <p><%= number_to_currency(reservation.total_cost, unit: "¥", format: "%u %n" ) %></p>
                     <label>よろしければ「削除」ボタンを押してください。</label>
                   </div>
                   <div class="modal-footer">

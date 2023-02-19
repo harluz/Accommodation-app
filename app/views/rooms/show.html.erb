@@ -7,7 +7,7 @@
 
 <%= image_tag @room.image.variant(resize: "550x317") %>
 <p><%= @room.name %></p>
-<p><%= @room.price %></p>
+<p><%= number_to_currency(@room.price, unit: "¥", format: "%u %n" ) %></p>
 <p><%= @room.detail %></p>
 <p><%= @room.adress %></p>
 

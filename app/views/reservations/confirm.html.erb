@@ -1,20 +1,21 @@
 <h2>予約内容の確認</h2>
 <p>チエックイン</p>
-<p><%= @reservation.check_in %></p>
+<p><%= l @reservation.check_in %></p>
 <p>チェックアウト</p>
-<p><%= @reservation.check_out %></p>
+<p><%= l @reservation.check_out %></p>
 <p>日数</p>
 <p><%= (@reservation.check_out - @reservation.check_in).to_i %>日</p>
 <p>人数</p>
 <p><%= @reservation.count_person %>人</p>
 <p>お支払い金額</p>
-<p>¥<%= @reservation.total_cost %></p>
+<p><%= number_to_currency(@reservation.total_cost, unit: "¥", format: "%u %n" ) %></p>
 <p>上記内容で正しければ「確定」ボタンを押してください。</p>
 
 <%= form_with(model: @reservation, method: :post, url: reservations_path) do |f| %>
   <%= f.hidden_field :check_in, value: @reservation.check_in %>
   <%= f.hidden_field :check_out, value: @reservation.check_out %>
   <%= f.hidden_field :count_person, value: @reservation.count_person %>
+  
   <%= f.hidden_field :total_cost, value: @reservation.total_cost %>
   <%= f.hidden_field :room_id, value: @reservation.room_id %>
 

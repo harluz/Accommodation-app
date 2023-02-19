@@ -24,7 +24,7 @@
             <% end %>
           </td>
           <td><%= room.detail %></td>
-          <td><%= room.price %>~</td>
+          <td><%= number_to_currency(room.price, unit: "¥", format: "%u %n" ) %>~</td>
           <td><%= l room.created_at, format: :short %></td>
           <td>
             <%= link_to(edit_room_path(room.id)) do %>
@@ -46,7 +46,7 @@
                   <div class="modal-body">
                     <%= image_tag room.image.variant(resize: "120x69").processed %>
                     <%= room.name %>
-                    <%= room.price %>~ / 日
+                    <%= number_to_currency(room.price, unit: "¥", format: "%u %n" ) %>~ / 日
                     <label>よろしければ「削除」ボタンを押してください。</label>
                   </div>
                   <div class="modal-footer">
