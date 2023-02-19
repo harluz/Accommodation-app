@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :reservations do
     collection do
       post :confirm
+      patch :confirm
     end
   end
 end

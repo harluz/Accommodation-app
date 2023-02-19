@@ -11,19 +11,16 @@
 <p><%= number_to_currency(@reservation.total_cost, unit: "¥", format: "%u %n" ) %></p>
 <p>上記内容で正しければ「確定」ボタンを押してください。</p>
 
-<%= form_with(model: @reservation, method: :post, url: reservations_path) do |f| %>
-  <%= f.hidden_field :check_in, value: @reservation.check_in %>
-  <%= f.hidden_field :check_out, value: @reservation.check_out %>
-  <%= f.hidden_field :count_person, value: @reservation.count_person %>
+<% if request.post? %>
+  <%= form_with(model: @reservation, method: :post, url: reservations_path) do |f| %>
+
+    <%= render "reservations/shared/reservation_info", obj: f %>
   
-  <%= f.hidden_field :total_cost, value: @reservation.total_cost %>
-  <%= f.hidden_field :room_id, value: @reservation.room_id %>
+  <% end %>
+<% elsif request.patch? %>
+  <%= form_with(model: @reservation, method: :patch, url: reservation_path(@reservation)) do |f| %>
 
-  <div class="actions">
-    <%= f.submit "予約を確定" %>
-  </div>
-
-  <div>
-    <%= link_to "キャンセル", room_path(@reservation.room_id) %>
-  </div>
+    <%= render "reservations/shared/reservation_info", obj: f %>
+  
+  <% end %>
 <% end %>

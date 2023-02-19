@@ -3,30 +3,30 @@ class ReservationsController < ApplicationController
   before_action :ensure_user, only: [:edit, :update, :destroy]
 
   def confirm
-    @reservation = Reservation.new(reservation_params)
-    @room = Room.find(params[:reservation][:room_id])
-    @reservation.user_id = current_user.id
-    @reservation.room_id = @room.id
-    @reservation.total_cost = @reservation.count_person * @room.price
+    if request.post?
+      set_new_reservation
+    elsif request.patch?
+      @reservation = Reservation.find(params[:reservation][:id])
+      @reservation.check_in = params[:reservation][:check_in]
+      @reservation.check_out = params[:reservation][:check_out]
+      @reservation.count_person = params[:reservation][:count_person]
+    end
+
     if @reservation.invalid?
       render :new
     end
   end
 
   def index
-    @reservations = Reservation.all
+    @reservations = current_user.reservations
   end
   
 
   def create
-    @reservation = Reservation.new(reservation_params)
-    @room = Room.find(params[:reservation][:room_id])
-    @reservation.user_id = current_user.id
-    @reservation.room_id = @room.id
-    @reservation.total_cost = @reservation.count_person * @room.price
+    set_new_reservation
     if @reservation.save
       flash[:notice] = "予約が完了しました。"
-      redirect_to reservations_path
+      redirect_to search_rooms_path
     else
       render :new
     end
@@ -36,18 +36,18 @@ class ReservationsController < ApplicationController
   end
 
   def edit
-    # @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find(params[:id])
   end
 
   def update
-    # @reservation = Reservation.find(params[:id])
-    # if @reservation.update(reservation_params)
-    #   flash[:notice] = "予約の更新が完了しました。"
-    #   redirect_to reservations_confirm_path
-    # else
-    #   flash[:alert] = "予約の更新に失敗しました。"
-    #   render :edit
-    # end
+    @reservation = Reservation.find(params[:id])
+    if @reservation.update(reservation_params)
+      flash[:notice] = "予約を更新しました。"
+      redirect_to search_rooms_path
+    else
+      flash[:alert] = "予約の更新に失敗しました。"
+      render :edit
+    end
   end
 
   def destroy
@@ -63,5 +63,13 @@ class ReservationsController < ApplicationController
       @reservations = current_user.reservations
       @reservation = @reservations.find_by(id: params[:id])
       redirect_back fallback_location: root_path unless @reservation
+    end
+
+    def set_new_reservation
+      @reservation = Reservation.new(reservation_params)
+      @room = Room.find(params[:reservation][:room_id])
+      @reservation.user_id = current_user.id
+      @reservation.room_id = @room.id
+      @reservation.total_cost = @reservation.count_person * @room.price
     end
 end

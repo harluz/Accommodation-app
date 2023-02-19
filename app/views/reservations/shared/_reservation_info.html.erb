@@ -1,0 +1,13 @@
+<%= obj.hidden_field :check_in, value: @reservation.check_in %>
+<%= obj.hidden_field :check_out, value: @reservation.check_out %>
+<%= obj.hidden_field :count_person, value: @reservation.count_person %>
+<%= obj.hidden_field :total_cost, value: @reservation.total_cost %>
+<%= obj.hidden_field :room_id, value: @reservation.room_id %>
+
+<div class="actions">
+  <%= obj.submit "予約を確定" %>
+</div>
+
+<div>
+  <%= link_to "キャンセル", room_path(@reservation.room_id) %>
+</div>
