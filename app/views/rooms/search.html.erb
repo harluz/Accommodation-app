@@ -1,8 +1,6 @@
 <%= search_form_for @q, url: search_rooms_path do |f| %>
   <%= f.search_field :adress_cont, placeholder: 'エリア名を入力' %>
-  <br>
-<%= f.search_field :name_or_detail_cont, placeholder: 'キーワードを入力' %>
-  <br>
+  <%= f.search_field :name_or_detail_cont, placeholder: 'キーワードを入力' %>
   <%= f.submit '検索' %>
 <% end %>
 
@@ -19,7 +17,7 @@
             <p class="card-text"><%= room.detail %></p>
             <p class="card-text"><%= number_to_currency(room.price, unit: "¥", format: "%u %n" ) %></p>
             <%= link_to(room) do %>
-              <s class="btn btn-primary text-right">詳細はこちら</button>
+              <button class="btn btn-primary text-right">詳細はこちら</button>
             <% end %>
           </div>
         </div>

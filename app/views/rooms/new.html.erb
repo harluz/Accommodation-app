@@ -1,29 +1,30 @@
+<h2>新規登録</h2>
+
 <%= form_with model: @room do |f| %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ルーム名を入力" %>
   </div>
 
-
   <div class="field">
-    <%= f.label :detail %><br />
-    <%= f.text_area :detail, autofocus: true, autocomplete: "detail" %>
+    <%= f.label :detail %>
+    <%= f.text_area :detail, autofocus: true, autocomplete: "detail", placeholder: "施設詳細を入力" %>
   </div>
 
   <div class="field">
     <%= f.label :price %>
-    <%= f.number_field :price, min: 0, autocomplete: "price" %>
+    <%= f.number_field :price, min: 0, autocomplete: "price", placeholder: "一日あたりの料金を入力" %>
   </div>
 
   <div class="field">
-    <%= f.label :adress %><br />
-    <%= f.text_field :adress, autocomplete: "adress" %>
+    <%= f.label :adress %>
+    <%= f.text_field :adress, autocomplete: "adress", placeholder: "住所を入力" %>
   </div>
 
   <div class="field">
-    <%= f.label :image %><br />
-    <%= f.file_field :image, autocomplete: "image" %>
+    <%= f.label :image %>
+    <%= f.file_field :image, autocomplete: "image", class: "hidden" %>
   </div>
 
   <div class="actions">

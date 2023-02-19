@@ -1,5 +1,5 @@
 <h1>プロフィール</h1>
-<%= link_to "編集", users_profile_edit_path %><br />
+<%= link_to "編集", users_profile_edit_path %>
 
 <h3>アイコン画像</h3>
 <% if @user.avatar.attached? %>
@@ -11,4 +11,4 @@
 <h3>自己紹介</h3>
 <%= @user.introduction %>
 
-<%= link_to "アカウント", users_account_path %><br />
+<%= link_to "アカウント", users_account_path %>
