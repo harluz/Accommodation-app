@@ -21,10 +21,17 @@ ja:
     attributes:
       room:
         name: 施設名
+        image: 施設画像 
         detail: 施設詳細
         adress: 住所
         price: 料金
-        room_image: 施設画像
+    models:
+      reservation: 予約
+    attributes:
+      reservation:
+        check_in: チェックイン
+        check_out: チェックアウト
+        count_person: 人数
   date:
     abbr_day_names:
       - 日
