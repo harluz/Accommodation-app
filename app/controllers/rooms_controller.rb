@@ -43,7 +43,7 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy
     flash[:notice] = "施設が削除されました。"
-    redirect_to rooms_index_path
+    redirect_to search_rooms_path
   end
 
   def own
@@ -72,7 +72,7 @@ class RoomsController < ApplicationController
     @rooms = current_user.rooms
     @room = @rooms.find_by(id: params[:id])
     # current_userのroomでなければ飛ばす
-    redirect_to room_index_path unless @room
+    redirect_to search_rooms_path unless @room
   end
   
   protected
