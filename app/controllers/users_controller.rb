@@ -1,17 +1,15 @@
 class UsersController < ApplicationController
   before_action :default_avatar, only: [:profile, :update]
   before_action :authenticate_user!
+  before_action :set_user,
 
   def profile
-    @user = current_user
   end
 
   def edit
-    @user = current_user
   end
 
   def update
-    @user = current_user
     if @user.update(user_parmas)
       flash[:notice] = "プロフィールの更新が完了しました。"
       redirect_to users_profile_path
@@ -22,8 +20,14 @@ class UsersController < ApplicationController
   end
   
   def account
+  end
+
+  private
+
+  def set_user
     @user = current_user
   end
+  
 
   protected
 
