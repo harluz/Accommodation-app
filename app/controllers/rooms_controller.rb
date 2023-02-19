@@ -42,7 +42,7 @@ class RoomsController < ApplicationController
 
   def destroy
     @room.destroy
-    flash[:notice] = "施設情報を削除しました。"
+    flash[:notice] = "施設が削除されました。"
     redirect_to rooms_index_path
   end
 
