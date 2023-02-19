@@ -51,7 +51,7 @@ class RoomsController < ApplicationController
   end
   
   def search
-    @result = @q.result
+    @results = @q.result
   end
 
   private
@@ -75,7 +75,6 @@ class RoomsController < ApplicationController
     redirect_to room_index_path unless @room
   end
   
-
   protected
 
   def defualt_room_image
