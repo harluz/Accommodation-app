@@ -1,15 +1,67 @@
-<% @rooms.each do |room|%>
-  <%= link_to room_path(room.id) do %>
-    <%= image_tag room.image.variant(resize: "120x69").processed %>
-  <% end %>
-  <%= link_to room_path(room.id) do %>
-    <p><%= room.name %></p>
-  <% end %>
-  <p><%= room.detail %></p>
-  <p><%= room.adress %></p>
-  <p><%= room.price %></p>
-  <p><%= room.updated_at %></p>
-  <p><%= link_to "編集", edit_room_path(room.id) %></p>
-  <p><%= link_to "削除", room, method: :delete, data: { confirm: "施設を削除しますか？" }  %></p>
-  <p>------------------------------</p>
-<% end %>
+<div class="table-responsive TableResponsive">
+  <table class="table Table">
+    <thead>
+      <th class="col">画像</th>
+      <th class="col">施設名</th>
+      <th class="col">紹介文</th>
+      <th class="col">料金</th>
+      <th class="col">作成日</th>
+      <th class="col"></th>
+      <th class="col"></th>
+    </thead>
+
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td>
+            <%= link_to room_path(room.id) do %>
+              <%= image_tag room.image.variant(resize: "120x69").processed %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to room_path(room.id) do %>
+              <%= room.name %>
+            <% end %>
+          </td>
+          <td><%= room.detail %></td>
+          <td><%= room.price %>~</td>
+          <td><%= l room.created_at, format: :short %></td>
+          <td>
+            <%= link_to(edit_room_path(room.id)) do %>
+              <button class="btn btn-primary">編集</button>
+            <% end %>
+          </td>
+          <td>
+            <!-- モーダルを開くボタン・リンク -->
+            <a class="btn btn-primary" data-toggle="modal" data-target="#testModal">削除</a>
+          </td>
+        </tr>
+        <!-- ボタン・リンククリック後に表示される画面の内容 -->
+        <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="myModalLabel">以下の施設を削除しますか？</h4>
+                  </div>
+                  <div class="modal-body">
+                    <%= image_tag room.image.variant(resize: "120x69").processed %>
+                    <%= room.name %>
+                    <%= room.price %>~ / 日
+                    <label>よろしければ「削除」ボタンを押してください。</label>
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn btn-default">
+                        <%= link_to(room, method: :delete) do %>
+                          <button class="btn btn-primary">削除</button>
+                        <% end %>
+                      </button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+</div>
