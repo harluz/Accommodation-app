@@ -22,6 +22,7 @@ class RoomsController < ApplicationController
       flash[:notice] = "施設の登録が完了しました。"
       redirect_to room_path(@room)
     else
+      flash[:alert] = "施設の登録に失敗しました。"
       render "new"
     end
   end
@@ -36,7 +37,10 @@ class RoomsController < ApplicationController
   def update
     if @room.update(room_params)
       flash[:notice] = "施設情報を更新しました。"
-      redirect_to :rooms
+      redirect_to room_path(@room)
+    else
+      flash[:alert] = "施設情報の更新に失敗しました。"
+      render :edit
     end
   end
 
