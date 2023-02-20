@@ -8,6 +8,8 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       user: ユーザー
+      room: 施設
+      reservation: 予約
     attributes:
       user:
         name: 名前
@@ -16,18 +18,12 @@ ja:
         password_confirmation: 確認用パスワード
         introduction: 紹介文
         avatar: アイコン
-    models:
-      room: 施設
-    attributes:
       room:
         name: 施設名
-        image: 施設画像 
+        image: 施設画像
         detail: 施設詳細
         adress: 住所
         price: 料金
-    models:
-      reservation: 予約
-    attributes:
       reservation:
         check_in: チェックイン
         check_out: チェックアウト
