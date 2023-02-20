@@ -13,7 +13,7 @@ class ReservationsController < ApplicationController
     end
 
     if @reservation.invalid?
-      render :new
+      render "rooms/show"
     end
   end
 
@@ -70,6 +70,8 @@ class ReservationsController < ApplicationController
       @room = Room.find(params[:reservation][:room_id])
       @reservation.user_id = current_user.id
       @reservation.room_id = @room.id
-      @reservation.total_cost = @reservation.count_person * @room.price
+      if @reservation.count_person
+        @reservation.total_cost = @reservation.count_person * @room.price
+      end
     end
 end
