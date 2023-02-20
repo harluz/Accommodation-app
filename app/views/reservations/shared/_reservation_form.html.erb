@@ -1,14 +1,23 @@
 <div class="field">
-    <%= obj.label :check_in %><br />
-    <%= obj.date_field :check_in, autofocus: true, autocomplete: "check_in" %>
-  </div>
+  <%= obj.label :check_in %>
+  <%= obj.date_field :check_in, autofocus: true, autocomplete: "check_in" %>
+</div>
+<% if @reservation.errors.include?(:check_in) %>
+  <p class="text-danger"><%= @reservation.errors.full_messages_for(:check_in).first %></p>
+<% end %>
 
-  <div class="field">
-    <%= obj.label :check_out %><br />
-    <%= obj.date_field :check_out, autofocus: true, autocomplete: "check_out" %>
-  </div>
+<div class="field">
+  <%= obj.label :check_out %>
+  <%= obj.date_field :check_out, autofocus: true, autocomplete: "check_out" %>
+</div>
+<% if @reservation.errors.include?(:check_out) %>
+  <p class="text-danger"><%= @reservation.errors.full_messages_for(:check_out).first %></p>
+<% end %>
 
-  <div class="field">
-    <%= obj.label :count_person %>
-    <%= obj.number_field :count_person, min: 0, autocomplete: "count_person" %>
-  </div>
+<div class="field">
+  <%= obj.label :count_person %>
+  <%= obj.number_field :count_person, min: 0, autocomplete: "count_person" %>
+</div>
+<% if @reservation.errors.include?(:count_person) %>
+  <p class="text-danger"><%= @reservation.errors.full_messages_for(:count_person).first %></p>
+<% end %>
