@@ -1,37 +1,5 @@
 <h2>新規登録</h2>
 
 <%= form_with model: @room do |f| %>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ルーム名を入力" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :detail %>
-    <%= f.text_area :detail, autofocus: true, autocomplete: "detail", placeholder: "施設詳細を入力" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.number_field :price, min: 0, autocomplete: "price", placeholder: "一日あたりの料金を入力" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :adress %>
-    <%= f.text_field :adress, autocomplete: "adress", placeholder: "住所を入力" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :image %>
-    <%= f.file_field :image, autocomplete: "image", class: "hidden" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "保存" %>
-  </div>
-
-  <div>
-    <%= link_to "キャンセル", root_path %>
-  </div>
+  <%= render "rooms/shared/room_form", obj: f %>
 <% end %>
