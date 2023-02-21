@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :default_avatar, only: [:profile, :update]
   before_action :authenticate_user!
-  before_action :set_user,
+  before_action :set_user
 
   def profile
   end
