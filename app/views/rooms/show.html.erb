@@ -1,32 +1,35 @@
-
-<% if (@room && @room.user == current_user) || (@reservation && @reservation.user_id == current_user) %>
-  <p><%= link_to "編集", edit_room_path(@room) %></p>
-<% end %>
-
-<%= link_to "戻る", :back %>
-<% if @room %>
-  <%= image_tag @room.image.variant(resize: "550x317") %>
-  <p><%= @room.name %></p>
-  <p><%= number_to_currency(@room.price, unit: "¥", format: "%u %n" ) %></p>
-  <p><%= @room.detail %></p>
-  <p><%= @room.adress %></p>
-<% elsif @reservation %>
-  <%= image_tag @reservation.room.image.variant(resize: "550x317") %>
-  <p><%= @reservation.room.name %></p>
-  <p><%= number_to_currency(@reservation.room.price, unit: "¥", format: "%u %n" ) %></p>
-  <p><%= @reservation.room.detail %></p>
-  <p><%= @reservation.room.adress %></p>
-<% end %>
-
-<%= form_with(model: @reservation, url: confirm_reservations_path(@reservation)) do |f| %>
-  <% if @room %>
-    <%= f.hidden_field :room_id, value: @room.id %>
-  <% elsif @reservation %>
-    <%= f.hidden_field :room_id, value: @reservation.room_id %>
-  <% end %>
-  <%= render "reservations/shared/reservation_form", obj: f %>
-
-  <div class="actions">
-    <%= f.submit "予約する" %>
+<div class="container" >
+  <div class="row" >
+    <p class="pull-left" ><%= link_to "戻る", :back %></p>
+    <% if (@room && @room.user == current_user) || (@reservation && @reservation.user_id == current_user) %>
+      <p class="pull-right" ><%= link_to "編集", edit_room_path(@room) %></p>
+    <% end %>
   </div>
-<% end %>
+
+  <% if @room %>
+    <%= image_tag @room.image.variant(resize: "550x317") %>
+    <p><%= @room.name %></p>
+    <p><%= number_to_currency(@room.price, unit: "¥", format: "%u %n" ) %></p>
+    <p><%= @room.detail %></p>
+    <p><%= @room.adress %></p>
+  <% elsif @reservation %>
+    <%= image_tag @reservation.room.image.variant(resize: "550x317") %>
+    <p><%= @reservation.room.name %></p>
+    <p><%= number_to_currency(@reservation.room.price, unit: "¥", format: "%u %n" ) %></p>
+    <p><%= @reservation.room.detail %></p>
+    <p><%= @reservation.room.adress %></p>
+  <% end %>
+
+  <%= form_with(model: @reservation, url: confirm_reservations_path(@reservation)) do |f| %>
+    <% if @room %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+    <% elsif @reservation %>
+      <%= f.hidden_field :room_id, value: @reservation.room_id %>
+    <% end %>
+    <%= render "reservations/shared/reservation_form", obj: f %>
+
+    <div class="actions">
+      <%= f.submit "予約する" %>
+    </div>
+  <% end %>
+</div>

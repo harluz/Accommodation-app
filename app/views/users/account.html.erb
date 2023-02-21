@@ -1,9 +1,18 @@
-<h1>アカウント</h1>
-<%= link_to "編集", edit_user_registration_path %><br />
-
-<h3>メールアドレス</h3>
-<%= @user.email %>
-<h3>パスワード</h3>
-<p>*********</p>
-
-<%= link_to "プロフィール", users_profile_path %><br />
+<div class="container-fluid">
+  <div class="row" >
+    <div class="col" >
+      <%= link_to "アカウント", users_account_path %><br />
+      <%= link_to "プロフィール", users_profile_path %>
+    </div>
+    <div class="col" >
+      <h2>アカウント</h2>
+      <p>メールアドレス</p>
+      <p><%= @user.email %></p>
+      <p>パスワード</p>
+      <p>*********</p>
+    </div>
+    <div class="col" >
+      <%= link_to "編集", edit_user_registration_path %>
+    </div>
+  </div>
+</div>

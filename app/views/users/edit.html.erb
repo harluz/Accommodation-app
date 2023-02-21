@@ -1,28 +1,29 @@
-<%= form_with model: @user, url: users_profile_edit_path(@user) do |f| %>
+<div class="container" >
+  <%= form_with model: @user, url: users_profile_edit_path(@user) do |f| %>
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.avatar, size: "80x80" %>
+    <% end %>
+    <div class="field">
+      <%= f.label :avatar, class: "form-label" %>
+      <%= f.file_field :avatar, autocomplete: "avatar" %>
+    </div>
 
-  <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar, size: "80x80" %>
+    <div class="field">
+      <%= f.label :name, class: "form-label" %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :introduction, class: "form-label" %><br />
+      <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction", class: "form-control" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "保存", class: "btn btn-primary" %>
+    </div>
+
+    <div>
+      <%= link_to "キャンセル", :back %>
+    </div>
   <% end %>
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.file_field :image, autocomplete: "image" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :introduction %><br />
-    <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "保存" %>
-  </div>
-
-  <div>
-    <%= link_to "キャンセル", :back %>
-  </div>
-<% end %>
+</div>

@@ -1,44 +1,45 @@
-<div class="field">
-  <%= obj.label :name %>
-  <%= obj.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ルーム名を入力" %>
-</div>
-<% if @room.errors.include?(:name) %>
-  <p class="text-danger"><%= @room.errors.full_messages_for(:name).first %></p>
-<% end %>
+<div class="container" >
+  <div class="center-block">
+    <div class="field">
+      <%= obj.label :name, class: "form-label" %>
+      <%= obj.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ルーム名を入力", class: "form-control" %>
+    </div>
+    <% if @room.errors.include?(:name) %>
+      <p class="text-danger"><%= @room.errors.full_messages_for(:name).first %></p>
+    <% end %>
 
-<div class="field">
-  <%= obj.label :detail %>
-  <%= obj.text_area :detail, autofocus: true, autocomplete: "detail", placeholder: "施設詳細を入力" %>
-</div>
-<% if @room.errors.include?(:detail) %>
-  <p class="text-danger"><%= @room.errors.full_messages_for(:detail).first %></p>
-<% end %>
+    <div class="field">
+      <%= obj.label :detail, class: "form-label" %>
+      <%= obj.text_area :detail, autofocus: true, autocomplete: "detail", placeholder: "施設詳細を入力", class: "form-control" %>
+    </div>
+    <% if @room.errors.include?(:detail) %>
+      <p class="text-danger"><%= @room.errors.full_messages_for(:detail).first %></p>
+    <% end %>
 
-<div class="field">
-  <%= obj.label :price %>
-  <%= obj.number_field :price, min: 0, autocomplete: "price", placeholder: "一日あたりの料金を入力" %>
-</div>
-<% if @room.errors.include?(:price) %>
-  <p class="text-danger"><%= @room.errors.full_messages_for(:price).first %></p>
-<% end %>
+    <div class="field">
+      <%= obj.label :price, class: "form-label" %>
+      <%= obj.number_field :price, min: 0, autocomplete: "price", placeholder: "一日あたりの料金を入力", class: "form-control" %>
+    </div>
+    <% if @room.errors.include?(:price) %>
+      <p class="text-danger"><%= @room.errors.full_messages_for(:price).first %></p>
+    <% end %>
 
-<div class="field">
-  <%= obj.label :adress %>
-  <%= obj.text_field :adress, autocomplete: "adress", placeholder: "住所を入力" %>
-</div>
-<% if @room.errors.include?(:adress) %>
-  <p class="text-danger"><%= @room.errors.full_messages_for(:adress).first %></p>
-<% end %>
+    <div class="field">
+      <%= obj.label :adress, class: "form-label" %>
+      <%= obj.text_field :adress, autocomplete: "adress", placeholder: "住所を入力", class: "form-control" %>
+    </div>
+    <% if @room.errors.include?(:adress) %>
+      <p class="text-danger"><%= @room.errors.full_messages_for(:adress).first %></p>
+    <% end %>
 
-<div class="field">
-  <%= obj.label :image %>
-  <%= obj.file_field :image, autocomplete: "image", class: "hidden" %>
-</div>
+    <div class="field">
+      <%= obj.label :image, class: "form-label" %><br />
+      <%= obj.file_field :image, autocomplete: "image", class: "hidden" %>
+    </div>
 
-<div class="actions">
-  <%= obj.submit "保存" %>
-</div>
-
-<div>
-  <%= link_to "キャンセル", :back %>
+    <div class="actions">
+      <%= obj.submit "保存", class: "btn btn-primary" %>
+    </div>
+    <%= link_to "キャンセル", :back %>
+  </div>
 </div>
