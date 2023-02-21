@@ -21,5 +21,7 @@ module AccommondationApp
     config.i18n.default_locale = :ja
 
     config.active_storage.variant_processor = :mini_magick
+
+    config.time_zone = 'Tokyo'
   end
 end
