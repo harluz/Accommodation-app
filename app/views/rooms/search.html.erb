@@ -1,0 +1,27 @@
+<%= search_form_for @q, url: search_rooms_path do |f| %>
+  <%= f.search_field :adress_cont, placeholder: 'エリア名を入力' %>
+  <%= f.search_field :name_or_detail_cont, placeholder: 'キーワードを入力' %>
+  <%= f.submit '検索' %>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <p><span><%= @results.count %></span>件が見つかりました。</p>
+    <% @results.each do |room| %>
+      <div class="col-md-4">
+        <div class="card" style="width: 27rem;">
+          <div class="card-img-top"><%= image_tag room.image.variant(resize: "437x245") %></div>
+          <div class="card-body">
+            <h5 class="card-title"><%= room.name %></h5>
+            <p class="card-subtitle"><%= room.adress %></p>
+            <p class="card-text"><%= room.detail %></p>
+            <p class="card-text"><%= number_to_currency(room.price, unit: "¥", format: "%u %n" ) %></p>
+            <%= link_to(room) do %>
+              <button class="btn btn-primary text-right">詳細はこちら</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

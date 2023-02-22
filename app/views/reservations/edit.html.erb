@@ -1,0 +1,19 @@
+<%= image_tag @reservation.room.image.variant(resize: "120x69").processed %>
+<p><%= @reservation.room.name %></p>
+<p><%= @reservation.room.adress %></p>
+<p><%= number_to_currency(@reservation.room.price, unit: "¥", format: "%u %n" ) %></p>
+<p><%= @reservation.room.detail %></p>
+
+<%= form_with(model: @reservation,  method: :patch, url: confirm_reservations_path(@reservation)) do |f| %>
+  <%= f.hidden_field :id, value: @reservation.id %>
+
+  <%= render "reservations/shared/reservation_form", obj: f %>
+
+  <div class="actions">
+    <%= f.submit "再予約" %>
+  </div>
+
+  <div>
+    <%= link_to "キャンセル", reservations_path %>
+  </div>
+<% end %>

@@ -1,0 +1,75 @@
+<h2>予約済み一覧</h2>
+
+<div class="table-responsive TableResponsive">
+  <table class="table Table">
+    <thead>
+      <th class="col">画像</th>
+      <th class="col">施設名</th>
+      <th class="col">紹介文</th>
+      <th class="col">合計料金</th>
+      <th class="col">チェックイン</th>
+      <th class="col">チェックアウト</th>
+      <th class="col">予約確定日時</th>
+      <th class="col"></th>
+      <th class="col"></th>
+    </thead>
+
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td>
+            <%= link_to room_path(reservation.room) do %>
+              <%= image_tag reservation.room.image.variant(resize: "120x69").processed %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to room_path(reservation.room) do %>
+              <%= reservation.room.name %>
+            <% end %>
+          </td>
+          <td><%= reservation.room.detail %></td>
+          <td><%= number_to_currency(reservation.total_cost, unit: "¥", format: "%u %n" ) %></td>
+          <td><%= l reservation.check_in %></td>
+          <td><%= l reservation.check_out %></td>
+          <td><%= l reservation.created_at, format: :long %></td>
+          <td>
+            <%= link_to(edit_reservation_path(reservation.id)) do %>
+              <button class="btn btn-primary">編集</button>
+            <% end %>
+          </td>
+          <td>
+            <!-- モーダルを開くボタン・リンク -->
+            <a class="btn btn-primary" data-toggle="modal" data-target="#testModal">削除</a>
+          </td>
+        </tr>
+        <!-- ボタン・リンククリック後に表示される画面の内容 -->
+        <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="myModalLabel">以下の施設を削除しますか？</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p><%= image_tag reservation.room.image.variant(resize: "120x69").processed %></p>
+                    <p><%= reservation.room.name %></p>
+                    <p><%= l reservation.check_in %> ~ <%= l reservation.check_out %></p>
+                    <p><%= reservation.count_person %>人</p>
+                    <p><%= number_to_currency(reservation.total_cost, unit: "¥", format: "%u %n" ) %></p>
+                    <label>よろしければ「削除」ボタンを押してください。</label>
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn btn-default">
+                        <%= link_to(reservation, method: :delete) do %>
+                          <button class="btn btn-primary">削除</button>
+                        <% end %>
+                      </button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+</div>

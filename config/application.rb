@@ -18,5 +18,10 @@ module AccommondationApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.i18n.default_locale = :ja
+
+    config.active_storage.variant_processor = :mini_magick
+
+    config.time_zone = 'Tokyo'
   end
 end
