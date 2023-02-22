@@ -1,6 +1,6 @@
 <div class="container" >
   <div class="row" >
-    <p class="pull-left" ><%= link_to "戻る", :back %></p>
+    <p class="pull-left" ><%= link_to "戻る", 'javascript:history.back()' %></p>
     <% if (@room && @room.user == current_user) || (@reservation && @reservation.user_id == current_user) %>
       <p class="pull-right" ><%= link_to "編集", edit_room_path(@room) %></p>
     <% end %>

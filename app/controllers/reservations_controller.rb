@@ -5,6 +5,9 @@ class ReservationsController < ApplicationController
   def confirm
     if request.post?
       set_new_reservation
+      
+      binding.pry
+      
     elsif request.patch?
       @reservation = Reservation.find(params[:reservation][:id])
       @reservation.check_in = params[:reservation][:check_in]
@@ -75,7 +78,7 @@ class ReservationsController < ApplicationController
       @reservation.user_id = current_user.id
       @reservation.room_id = @room.id
       if @reservation.count_person
-        @reservation.total_cost = @reservation.count_person * @room.price
+        @reservation.total_cost = ((@reservation.check_out - @reservation.check_in).to_i) * @reservation.count_person * @room.price
       end
     end
 end
